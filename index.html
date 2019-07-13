@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>OL Shift Calc8</title>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500'>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body>
+	<div id="container">
+		<h1>Overlook Shift Calculator</h1>
+
+		<form>
+			<div>
+				<input id="startTime" placeholder="Add Start Time" value="" list="stimes" name="mySTime" />
+				<datalist id="stimes">
+					<option value="9:30 am">
+					<option value="9:45 am">
+					<option value="9:50 am">
+					<option value="10:00 am">
+					<option value="10:10 am">
+					<option value="10:30 am">
+				</datalist>
+
+				<input id="endTime" placeholder="Add End Time" value="" list="eTimes" name="myETime" />
+				<datalist id="eTimes">
+					<option value="3:30 pm">
+					<option value="3:45 pm">
+					<option value="4:00 pm">
+					<option value="4:05 pm">
+					<option value="4:15 pm">
+					<option value="4:30 pm">
+				</datalist>
+
+				<input id="intervalByStaff" placeholder="Add number of staff" value="" list="number" name="staffNumber" />
+				<datalist id="number">
+					<option value="5">
+					<option value="6">
+					<option value="7">
+					<option value="8">
+					<option value="9">
+					<option value="10">
+				</datalist>
+
+				<label id="checkBoxLabel">Rounded times?
+					<input type="checkbox" id="roundedTimes" value="rounded" checked />
+				</label>
+
+				<label id="radioLabel">Results generated as:<br>
+					<label>
+						<input type="radio" id="listSelect" name="tableType" value="List" checked />List (with shift length)<br>
+					</label>
+					<label>
+						<input type="radio" id="tableSelect" name="tableType" value="Table" />Table (for coordinator sheet)<br>
+					</label>
+					<label>
+						<input type="radio" id="sheetSelect" name="tableType" value="Statistics Sheet" />Statistics Sheet (for overlook)<br>
+					</label>
+				</label>
+
+				<input type="button" id="calculateButton" value="Calculate" />
+				<input type="button" id="resetButton" value="Reset" />
+		</form>
+
+		<div id="results">
+			<table id="listTable"></table>
+			<table id="resultsTable"></table>
+			<table id="resultsSheet"></table>
+		</div>
+
+		<input type="button" id="selectButton" title="Select to copy to clipboard" value="Select Table" />
+
+
+	</div>
+
+	<script src="src/index.js"></script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,295 @@
+#container {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  margin: 100px auto;
+  background: #f7f7f7;
+}
+
+h1 {
+  background: #2980b9;
+  color: white;
+  margin: 0;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: normal;
+}
+
+#roundedTimes {
+  transform: scale(2);
+  width: 10px;
+  margin-left: 20px;
+}
+
+#listSelect {
+  transform: scale(2);
+  width: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#tableSelect {
+  transform: scale(2);
+  width: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#sheetSelect {
+  transform: scale(2);
+  width: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+label {
+  width: 300px;
+  float: left;
+  text-align: left;
+  padding: 20px;
+}
+
+span {
+  background: #e74c3c;
+  height: 40px;
+  margin-right: 20px;
+  text-align: center;
+  color: white;
+  width: 0px;
+  display: inline-block;
+  transition: 0.2s linear;
+  opacity: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto;
+  background: #2bc0e4; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #eaecc6,
+    #2bc0e4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #eaecc6,
+    #2bc0e4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+li {
+  background: white;
+  height: 40px;
+  line-height: 40px;
+  color: #666;
+}
+
+input {
+  font-size: 18px;
+  background: #f7f7f7;
+  width: 100%;
+  padding: 13px 13px 20px;
+  box-sizing: border-box;
+  color: black;
+  border: 3px solid rgba(0, 0, 0, 0);
+}
+
+#calculateButton {
+  background-color: #2980b9;
+  border: none;
+  color: white;
+  padding: 16px 30px;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#resetButton {
+  background-color: #a9a9a9;
+  border: none;
+  color: white;
+  padding: 16px 30px;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#selectButton {
+  background-color: purple;
+  border: none;
+  color: white;
+  padding: 16px 30px;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input:focus {
+  background: white;
+  border: 3px solid #2980b9;
+  outline: none;
+}
+
+#results {
+  font-size: 18px;
+  background: #f7f7f7;
+  width: 100%;
+  padding: 0px 0px 0px;
+  box-sizing: border-box;
+  color: black;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #results * {
+    visibility: visible;
+  }
+  #results {
+    position: absolute;
+    left: 100;
+    top: 0;
+  }
+}
+
+body {
+  -webkit-print-color-adjust: exact !important;
+}
+
+#listTable {
+  border: 1px solid blue;
+}
+
+#listTable th {
+  padding: 15px;
+  width: 30%;
+}
+
+#listTable td {
+  border: 1px solid blue;
+  padding: 15px;
+  width: 30%;
+}
+
+#resultsTable {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+#resultsTable th {
+  padding: 15px;
+  width: 30%;
+}
+
+#resultsTable td {
+  border: 1px solid black;
+  padding: 15px;
+  width: 30%;
+}
+
+#resultsSheet {
+  background: #cccdce;
+  width: 825px;
+  margin-left: -240px;
+}
+
+/* Old Version
+#resultsSheet {
+  background: #cccdce;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: auto;
+  position: relative;
+  right: 50%;
+  width: 100vw;
+}
+*/
+
+#resultsSheet td {
+  border: 1px solid black;
+  padding: 15px;
+  background: white;
+}
+
+.statsSheet {
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 10px 40px;
+  margin: 50px;
+  margin-top: -10px;
+}
+
+#statsHeader {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.statsSheet h4 {
+  font-size: large;
+  font-weight: normal;
+  margin-top: -25px;
+  margin-bottom: -900px;
+}
+
+.statsSheet tr {
+  padding: 20px;
+}
+
+.statsSheet td:nth-child(1) {
+  width: 20%;
+  transform: scaleY(1.15);
+}
+
+.statsSheet td:nth-child(2) {
+  width: 60%;
+  transform: scaleY(1.15);
+}
+
+.statsSheet td:nth-child(3) {
+  width: 20%;
+  transform: scaleY(1.15);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
