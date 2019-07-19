@@ -1,13 +1,9 @@
 /* 
 TODO 
-- review/refactor get24hTime...could be reviewed more
-- input validation..could be improved...staffnumber validation?
-- generate statistics sheet...improve?
 - add results css animations
 - ensure app is mobile responsive
   - how to get it to work on safari
-- create gitHub repository for this project
-- link codesandbox/github/neglify
+- link codesandbox/github/netlify
 LEARNING 
 - HTML/CSS/JS basics
 - JS date objects
@@ -20,9 +16,9 @@ LEARNING
 - eslint
 */
 
-var calc = document.getElementById("calculateButton");
-var clear = document.getElementById("resetButton");
-var copyT = document.getElementById("selectButton");
+const calc = document.getElementById("calculateButton");
+const clear = document.getElementById("resetButton");
+const copyT = document.getElementById("selectButton");
 
 calc.addEventListener("click", calculate);
 clear.addEventListener("click", clearBox);
@@ -36,7 +32,7 @@ function calculate() {
   var timesArray = [];
   var aList = [];
 
-  // reset results
+  // reset results before each new calculation
   document.getElementById("listTable").innerHTML = "";
   document.getElementById("resultsTable").innerHTML = "";
   document.getElementById("resultsSheet").innerHTML = "";
@@ -46,9 +42,10 @@ function calculate() {
   endValue = document.getElementById("endTime").value;
   staffNum = document.getElementById("intervalByStaff").value;
 
+  // input validation
   checkInput(startValue);
   checkInput(endValue);
-  //checkInput(staffNum);
+  checkStaffInput(staffNum);
 
   // translate user time from 12h into 24h
   milStartTime = get24hTime(startValue);
@@ -57,6 +54,8 @@ function calculate() {
   // create date objects with 24hour user input times
   startDate = new Date("2019 " + milStartTime);
   endDate = new Date("2019 " + milEndTime);
+
+  // calculate the shift length based on staff num, returns time in miliseconds
   offset = calculateByStaff(staffNum, startDate, endDate);
 
   // initialize array with times + interval
@@ -65,13 +64,13 @@ function calculate() {
   // format times in printable format
   aList = createShifts(timesArray);
 
-  // results...
+  // generate results based on selected format
   var listSel = document.getElementById("listSelect").checked;
   var tableSel = document.getElementById("tableSelect").checked;
   var sheetSel = document.getElementById("sheetSelect").checked;
 
+  // list format with shift length duration
   if (listSel) {
-    // testing list print
     var list = document.getElementById("listTable");
     if (startValue && endValue !== "") {
       generateTableHead1(list, aList);
@@ -79,8 +78,8 @@ function calculate() {
     }
   }
 
+  // table format with fillable staff column
   if (tableSel) {
-    // testing table print
     var table = document.getElementById("resultsTable");
     if (startValue && endValue !== "") {
       generateTableHead2(table, aList);
@@ -88,8 +87,8 @@ function calculate() {
     }
   }
 
+  // sheet format for statistics recording 
   if (sheetSel) {
-    // testing table print
     var table2 = document.getElementById("resultsSheet");
     if (startValue && endValue !== "") {
       generateTable3(table2, aList);
@@ -98,16 +97,17 @@ function calculate() {
 }
 
 // validate user input times - am/pm
+/*
+   Things this needs to do...
+   1. not null
+   2. has colon notation
+   3. has am or pm
+   4. hours between 1 and 12
+   5. minutes between 00 and 59
+   6. no letters...immediately breaks from chain of if statements
+   7. pm not entered as start value...checked in calculateByStaff
+*/
 function checkInput(formInput) {
-  // Things this needs to do...
-  // 1. not null
-  // 2. has colon notation
-  // 3. has am or pm
-  // 4. hours between 1 and 12
-  // 5. minutes between 00 and 59
-  // 6. no letters...immediately breaks from chain of if statements
-  // 7. pm not entered as start value...checked in calculateByStaff
-
   if (formInput !== "") {
     if (formInput.indexOf(":") > 0) {
       if (formInput.indexOf("am") > 0 || formInput.indexOf("pm") > 0) {
@@ -126,28 +126,29 @@ function checkInput(formInput) {
   return false;
 }
 
-// translate into 24h/military time
+// validate staff number input (should not be less than 0)
+function checkStaffInput(formInput) {
+  if (formInput <= 0) {
+    console.log("Error: Incorrect input.");
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+// translate into 24h time
 function get24hTime(timeInput) {
-  // casts input value as string, sets to lower case, removes spaces
   timeInput = String(timeInput)
     .toLowerCase()
     .replace(/\s/g, "");
-  // acknowledges am/pm occurs in input string and sets to appropriate variable
   var has_am = timeInput.indexOf("am") >= 0;
   var has_pm = timeInput.indexOf("pm") >= 0;
-  // first strip off the am/pm, leave it either hour or hour:minute
   timeInput = timeInput.replace("am", "").replace("pm", "");
-  // if hour, convert to hour:00
   if (timeInput.indexOf(":") < 0) timeInput = timeInput + ":00";
-  // now it's hour:minute
-  // we add am/pm back if striped out before
   if (has_am) timeInput += " am";
   if (has_pm) timeInput += " pm";
-  // now its either hour:minute, or hour:minute am/pm
-  // put it in a date object, it will convert to 24 hours format for us
-  var dObj = new Date("1/1/2019 " + timeInput);
-  // make hours and minutes double digits
-  // uses anonymous function assigned to doubleDigits
+  var dObj = new Date("2019 " + timeInput);
   var doubleDigits = function(n) {
     return parseInt(n, 10) < 10 ? "0" + n : String(n);
   };
@@ -175,7 +176,7 @@ function fillArray(startDate, endDate, offset) {
   return tArray;
 }
 
-// loop through array, get time from date object, print results
+// loop through array, get time from date object, return results
 function createShifts(timesArray) {
   var arrayOfShifts = [];
   var start, end;
@@ -234,14 +235,11 @@ function createShifts(timesArray) {
     arrayOfShifts.push([shift, shiftLength]);
     start = end;
   }
-  console.log(arrayOfShifts);
   return arrayOfShifts;
-  //return arrayOf2DShifts;
 }
 
+// gets length of each shift, return as minutes
 function getShiftLength(sHour, sMin, eHour, eMin) {
-  console.log(eHour);
-  console.log(eMin);
   var offsetInMins;
   var hourDiff;
 
@@ -257,7 +255,6 @@ function getShiftLength(sHour, sMin, eHour, eMin) {
   } else {
     offsetInMins = eMin - sMin;
   }
-  console.log(offsetInMins);
   return offsetInMins;
 }
 
@@ -272,12 +269,9 @@ function clearBox() {
   document.getElementById("listTable").innerHTML = "";
   document.getElementById("resultsTable").innerHTML = "";
   document.getElementById("resultsSheet").innerHTML = "";
-  // cleared table id instead of results div to fix bug...
-  // clearing div deleted table?..could not submit 2nd/3rd/etc. try
-  //document.getElementById("results").innerHTML = "";
 }
 
-// generates table head
+// generates table head1 for list option
 function generateTableHead1(table) {
   var thead = table.createTHead();
   var row = thead.insertRow();
@@ -293,7 +287,7 @@ function generateTableHead1(table) {
   row.appendChild(cell2);
 }
 
-// generates table head2
+// generates table head2 for table option
 function generateTableHead2(table) {
   var thead = table.createTHead();
   var row = thead.insertRow();
@@ -309,7 +303,7 @@ function generateTableHead2(table) {
   row.appendChild(cell2);
 }
 
-// generates table
+// generates table for list option
 function generateTable1(table, arrayData) {
   for (var i = 0; i < arrayData.length; i++) {
     var row = table.insertRow();
@@ -324,7 +318,7 @@ function generateTable1(table, arrayData) {
   }
 }
 
-// generates table
+// generates table2 for table option
 function generateTable2(table, arrayData) {
   for (var i = 0; i < arrayData.length; i++) {
     var row = table.insertRow();
@@ -339,6 +333,7 @@ function generateTable2(table, arrayData) {
   }
 }
 
+// generates table3 for sheet option
 function generateTable3(table, arrayData) {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -348,7 +343,6 @@ function generateTable3(table, arrayData) {
 
   // creates a <table> element and a <tbody> element
   var tbl = document.createElement("table");
-  //var header = document.createElement("header");
   var header =
     "<tr><th colspan=3 id=statsHeader>Overlook Statistics</th></tr><tr><th colspan=3><h4>Date: " +
     today +
@@ -379,7 +373,6 @@ function generateTable3(table, arrayData) {
     // add the row to the end of the table body
     tblBody.appendChild(row);
   }
-  // This is for the quick solution
   tbl.innerHTML = header;
 
   // put the <tbody> in the <table>
@@ -391,11 +384,9 @@ function generateTable3(table, arrayData) {
   tbl.setAttribute("class", "statsSheet");
 }
 
-// trying to copy table to clipboard
-// SUCCESS!!...now figure out HTF it works
+// selects table allowing it to be copied to clipboard
 function selectElementContents(el) {
-  var selection = document.getElementById("resultsTable");
-
+  var selection = document.getElementById("results");
   var body = document.body,
     range,
     sel;
