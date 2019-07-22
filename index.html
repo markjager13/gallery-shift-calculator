@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>OL Shift Calc8</title>
+	<title>OL Shift Calculator</title>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500'>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="src/styles.css">
@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<h1>Overlook Shift Calculator</h1>
-
+				
 		<form>
 			<div>
 				<input id="startTime" placeholder="Add Start Time" value="" list="stimes" name="mySTime" />
@@ -65,17 +65,17 @@
 				<input type="button" id="resetButton" value="Reset" />
 		</form>
 
+		<p id="printInst">To print statistics sheet -- right click anywhere on the screen and click print.</p>
+
 		<div id="results">
 			<table id="listTable"></table>
 			<table id="resultsTable"></table>
 			<table id="resultsSheet"></table>
 		</div>
-
-		<input type="button" id="selectButton" title="Select to copy to clipboard" value="Select Table" />
-
-
+	
+		<input type="button" id="selectButton" title="Select to copy to clipboard" value="Copy table to clipboard" />
+		
 	</div>
-
 	<script src="src/index.js"></script>
 
 </body>

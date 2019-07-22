@@ -126,6 +126,7 @@ input {
 }
 
 #selectButton {
+  display: none;
   background-color: purple;
   border: none;
   color: white;
@@ -209,19 +210,6 @@ table {
   margin-left: -240px;
 }
 
-/* Old Version
-#resultsSheet {
-  background: #cccdce;
-  left: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  max-width: auto;
-  position: relative;
-  right: 50%;
-  width: 100vw;
-}
-*/
-
 #resultsSheet td {
   border: 1px solid black;
   padding: 15px;
@@ -267,29 +255,15 @@ table {
   transform: scaleY(1.15);
 }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
+#printInst {
+  display: none;
+  border: 2px solid rgb(211, 11, 11);
+  border-radius: 5px;
+  background-color: white;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+  padding: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: -140px;
+  width: 600px;
 }

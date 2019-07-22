@@ -1,5 +1,6 @@
 /* 
 TODO 
+- add help button underneath h1
 - add results css animations
 - ensure app is mobile responsive
   - how to get it to work on safari
@@ -36,6 +37,9 @@ function calculate() {
   document.getElementById("listTable").innerHTML = "";
   document.getElementById("resultsTable").innerHTML = "";
   document.getElementById("resultsSheet").innerHTML = "";
+  document.getElementById("selectButton").style.display = "none";
+  document.getElementById("printInst").style.display = "none";
+
 
   // get text input from user
   startValue = document.getElementById("startTime").value;
@@ -68,6 +72,20 @@ function calculate() {
   var listSel = document.getElementById("listSelect").checked;
   var tableSel = document.getElementById("tableSelect").checked;
   var sheetSel = document.getElementById("sheetSelect").checked;
+
+  // render copy button if list/table selected
+  if (listSel || tableSel) {
+    if (startValue && endValue !== "") {
+      copyT.style.display = "block";
+    }
+  }
+
+  // render print instructions if sheet selected
+  if (sheetSel) {
+    if (startValue && endValue !== "") {
+      document.getElementById("printInst").style.display = "block";
+    }
+  }
 
   // list format with shift length duration
   if (listSel) {
@@ -269,6 +287,8 @@ function clearBox() {
   document.getElementById("listTable").innerHTML = "";
   document.getElementById("resultsTable").innerHTML = "";
   document.getElementById("resultsSheet").innerHTML = "";
+  document.getElementById("selectButton").style.display = "none";
+  document.getElementById("printInst").style.display = "none";
 }
 
 // generates table head1 for list option
@@ -397,6 +417,7 @@ function selectElementContents(el) {
     try {
       range.selectNodeContents(selection);
       sel.addRange(range);
+      document.execCommand("copy");
     } catch (e) {
       range.selectNode(selection);
       sel.addRange(range);
