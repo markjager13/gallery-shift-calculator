@@ -13,9 +13,11 @@
 	<div id="container">
 		<h1>Overlook Shift Calculator</h1>
 				
+		<div id="input-container">
+
 		<form>
 			<div>
-				<input id="startTime" placeholder="Add Start Time" value="" list="stimes" name="mySTime" />
+				<input class="userInput" id="startTime" placeholder="Start Time" value="" list="stimes" name="mySTime" />
 				<datalist id="stimes">
 					<option value="9:30 am">
 					<option value="9:45 am">
@@ -25,7 +27,7 @@
 					<option value="10:30 am">
 				</datalist>
 
-				<input id="endTime" placeholder="Add End Time" value="" list="eTimes" name="myETime" />
+				<input class="userInput" id="endTime" placeholder="End Time" value="" list="eTimes" name="myETime" />
 				<datalist id="eTimes">
 					<option value="3:30 pm">
 					<option value="3:45 pm">
@@ -35,7 +37,7 @@
 					<option value="4:30 pm">
 				</datalist>
 
-				<input id="intervalByStaff" placeholder="Add number of staff" value="" list="number" name="staffNumber" />
+				<input class="userInput" id="intervalByStaff" placeholder="Number of Staff" value="" list="number" name="staffNumber" />
 				<datalist id="number">
 					<option value="5">
 					<option value="6">
@@ -45,37 +47,48 @@
 					<option value="10">
 				</datalist>
 
-				<label id="checkBoxLabel">Rounded times?
+				<label class="checkRadioLabel" id="checkBoxLabel">Rounded times?
 					<input type="checkbox" id="roundedTimes" value="rounded" checked />
 				</label>
 
-				<label id="radioLabel">Results generated as:<br>
+				<label class="checkRadioLabel" id="radioLabel">Results generated as:<br>
 					<label>
-						<input type="radio" id="listSelect" name="tableType" value="List" checked />List (with shift length)<br>
+						<input type="radio" class="radioSelect" id="listSelect" name="tableType" value="List" checked />Table (with shift length)<br>
 					</label>
 					<label>
-						<input type="radio" id="tableSelect" name="tableType" value="Table" />Table (for coordinator sheet)<br>
+						<input type="radio" class="radioSelect" id="tableSelect" name="tableType" value="Table" />Table (with staff column)<br>
 					</label>
 					<label>
-						<input type="radio" id="sheetSelect" name="tableType" value="Statistics Sheet" />Statistics Sheet (for overlook)<br>
+						<input type="radio" class="radioSelect" id="sheetSelect" name="tableType" value="Statistics Sheet" />Statistics Sheet (for overlook)<br>
 					</label>
 				</label>
 
-				<input type="button" id="calculateButton" value="Calculate" />
-				<input type="button" id="resetButton" value="Reset" />
+				<input type="button" class="userButton" id="calculateButton" value="CALCULATE" />
+				<input type="button" class="userButton"id="resetButton" value="RESET" />
 		</form>
 
-		<p id="printInst">To print statistics sheet -- right click anywhere on the screen and click print.</p>
+		<div>
+				<p id="printInst">To print statistics sheet -- right click anywhere on the screen and click print.</p>
+		
+				<div id="tableTypeResults">
+					<table id="listTable"></table>
+					<table id="resultsTable"></table>
+					<input type="button" class="userButton" id="selectButton" title="Select to copy to clipboard" value="Copy table to clipboard" />
+				</div>
 
-		<div id="results">
-			<table id="listTable"></table>
-			<table id="resultsTable"></table>
-			<table id="resultsSheet"></table>
+				<div id="sheetTypeResults">
+					<table id="resultsSheet"></table>
+				</div>
+				
 		</div>
-	
-		<input type="button" id="selectButton" title="Select to copy to clipboard" value="Copy table to clipboard" />
+			
 		
 	</div>
+
+
+	</div>
+
+
 	<script src="src/index.js"></script>
 
 </body>

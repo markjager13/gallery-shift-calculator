@@ -20,6 +20,9 @@ LEARNING
 const calc = document.getElementById("calculateButton");
 const clear = document.getElementById("resetButton");
 const copyT = document.getElementById("selectButton");
+const printT = document.getElementById("printButton");
+const animateTable = document.getElementById("tableTypeResults");
+const animateSheet = document.getElementById("sheetTypeResults");
 
 calc.addEventListener("click", calculate);
 clear.addEventListener("click", clearBox);
@@ -34,12 +37,7 @@ function calculate() {
   var aList = [];
 
   // reset results before each new calculation
-  document.getElementById("listTable").innerHTML = "";
-  document.getElementById("resultsTable").innerHTML = "";
-  document.getElementById("resultsSheet").innerHTML = "";
-  document.getElementById("selectButton").style.display = "none";
-  document.getElementById("printInst").style.display = "none";
-
+  clearAllResults();
 
   // get text input from user
   startValue = document.getElementById("startTime").value;
@@ -77,6 +75,7 @@ function calculate() {
   if (listSel || tableSel) {
     if (startValue && endValue !== "") {
       copyT.style.display = "block";
+      animateTable.classList.add("animate");
     }
   }
 
@@ -84,6 +83,7 @@ function calculate() {
   if (sheetSel) {
     if (startValue && endValue !== "") {
       document.getElementById("printInst").style.display = "block";
+      animateSheet.classList.add("animate");
     }
   }
 
@@ -276,19 +276,31 @@ function getShiftLength(sHour, sMin, eHour, eMin) {
   return offsetInMins;
 }
 
-// clears results box
-function clearBox() {
+// clears input
+function clearAllInput() {
   document.getElementById("startTime").value = "";
   document.getElementById("endTime").value = "";
   document.getElementById("intervalByStaff").value = "";
   document.getElementById("listSelect").checked = true;
   document.getElementById("tableSelect").checked = false;
   document.getElementById("sheetSelect").checked = false;
+}
+
+// clears results
+function clearAllResults() {
   document.getElementById("listTable").innerHTML = "";
   document.getElementById("resultsTable").innerHTML = "";
   document.getElementById("resultsSheet").innerHTML = "";
   document.getElementById("selectButton").style.display = "none";
   document.getElementById("printInst").style.display = "none";
+  animateTable.classList.remove("animate");
+  animateSheet.classList.remove("animate");
+}
+
+// resets all input and results
+function clearBox() {
+  clearAllInput();
+  clearAllResults();
 }
 
 // generates table head1 for list option
@@ -406,7 +418,7 @@ function generateTable3(table, arrayData) {
 
 // selects table allowing it to be copied to clipboard
 function selectElementContents(el) {
-  var selection = document.getElementById("results");
+  var selection = document.getElementById("tableTypeResults");
   var body = document.body,
     range,
     sel;
