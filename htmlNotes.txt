@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>OL Shift Calculator</title>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500'>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body>
+	<div id="container">
+		<h1>Overlook Shift Calculator</h1>
+				
+		<div id="input-container">
+
+		<form>
+			<div>
+				<input class="userInput" id="startTime" placeholder="Start Time" value="" list="stimes" name="mySTime" />
+				<datalist id="stimes">
+					<option value="9:30 am">
+					<option value="9:45 am">
+					<option value="9:50 am">
+					<option value="10:00 am">
+					<option value="10:10 am">
+					<option value="10:30 am">
+				</datalist>
+
+				<input class="userInput" id="endTime" placeholder="End Time" value="" list="eTimes" name="myETime" />
+				<datalist id="eTimes">
+					<option value="3:30 pm">
+					<option value="3:45 pm">
+					<option value="4:00 pm">
+					<option value="4:05 pm">
+					<option value="4:15 pm">
+					<option value="4:30 pm">
+				</datalist>
+
+				<input class="userInput" id="intervalByStaff" placeholder="Number of Staff" value="" list="number" name="staffNumber" />
+				<datalist id="number">
+					<option value="5">
+					<option value="6">
+					<option value="7">
+					<option value="8">
+					<option value="9">
+					<option value="10">
+				</datalist>
+
+				<label class="checkRadioLabel" id="checkBoxLabel">Rounded times?
+					<input type="checkbox" id="roundedTimes" value="rounded" checked />
+				</label>
+
+				<label class="checkRadioLabel" id="radioLabel">Results generated as:<br>
+					<label>
+						<input type="radio" class="radioSelect" id="tableSelectBig" name="tableType" value="TableBig" checked/>Schedule (for office)<br>
+					</label>
+					<label>
+						<input type="radio" class="radioSelect" id="sheetSelect" name="tableType" value="Statistics Sheet" />Statistics Sheet (for overlook)<br>
+					</label>					
+					<label>
+						<input type="radio" class="radioSelect" id="tableSelect" name="tableType" value="Table" />Table (with staff column)<br>
+					</label>
+				</label>
+
+				<input type="button" class="userButton" id="calculateButton" value="CALCULATE" />
+				<input type="button" class="userButton"id="resetButton" value="RESET" />
+		</form>
+
+		<div>
+				<p id="printInstOffice">
+					To print overlook schedule -- right click anywhere on the screen and click print. 
+				</p>
+				<p id="printInstOverlook">To print statistics sheet -- right click anywhere on the screen and click print.</p>
+		
+				<div id="tableTypeResults">
+					<table id="resultsTable"></table>
+					<input type="button" class="userButton" id="selectButton" title="Select to copy to clipboard" value="Copy table to clipboard" />
+				</div>
+
+				<div id="sheetTypeResults">
+					<table id="resultsTableBig"></table>
+					<table id="resultsSheet"></table>
+				</div>
+				
+		</div>
+			
+		
+	</div>
+
+
+	</div>
+
+
+	<script src="src/index.js"></script>
+
+</body>
+
+
+</html>
