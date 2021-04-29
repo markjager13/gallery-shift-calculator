@@ -205,7 +205,7 @@ function generateTableBigHeader(table) {
   today = mm + "/" + dd + "/" + yyyy;
 
   var header1 =
-    "<tr><th colspan=3 id=scheduleHeader>Overlook Schedule</th></tr>" +
+    "<tr><th colspan=3 id=scheduleHeader>Gallery Schedule</th></tr>" +
     "<tr><th colspan=3><h1 id=scheduleDate>Date: " +
     today +
     "</h1></th></tr>" +
@@ -239,7 +239,7 @@ function generateTable2(table, arrayData) {
   // creates a <table> element and a <tbody> element
   var tbl = document.createElement("table");
   var header =
-    "<tr><th colspan=3 id=statsHeader>Overlook Statistics</th></tr><tr><th colspan=3><h4>Date: " +
+    "<tr><th colspan=3 id=statsHeader>Gallery Statistics</th></tr><tr><th colspan=3><h4>Date: " +
     today +
     "</h4></th></tr><tr><th>Time</th><th>Notes</th><th>Total</th></tr>";
 
