@@ -1,4 +1,4 @@
-# overlook-calculator
-Repository for overlook shift calculator
+# Gallery-Shift-Calculator
 
-Learning how to use GitHub with overlook calculator program.
+•	HTML, CSS, JavaScript<br/>
+•	Generates a printable shift schedule and statistics form based on scheduling needs and staff available. 
